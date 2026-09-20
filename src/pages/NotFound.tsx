@@ -1,0 +1,3 @@
+import { Link } from 'react-router-dom'
+import Seo from '../components/Seo'
+export default function NotFound(){return <><Seo title="Page Not Found | Hafiz Lifelong Interior" description="The requested page could not be found."/><section className="flex min-h-[70vh] items-center justify-center bg-paper px-5 pt-24 text-center"><div><div className="text-sm font-extrabold uppercase tracking-[.18em] text-lime">404</div><h1 className="mt-3 font-display text-5xl font-extrabold text-navy">That page is not here.</h1><p className="mx-auto mt-4 max-w-md text-slate-600">Use the navigation to explore Hafiz Lifelong Interior's furniture and sports solutions.</p><Link to="/" className="btn-primary mt-7">Back to Home</Link></div></section></>}
