@@ -1,57 +1,161 @@
-import { useEffect } from 'react'
-import { BUSINESS } from '../data/site'
+import { useEffect } from "react";
 
-type Props = { title: string; description: string; path?: string }
+import { BUSINESS } from "../data/site";
 
-export default function Seo({ title, description, path = '/' }: Props) {
+interface SeoProps {
+  title: string;
+  description: string;
+  path?: string;
+}
+
+function upsertMeta(
+  name: string,
+  content: string
+) {
+  let element = document.querySelector(
+    `meta[name="${name}"]`
+  ) as HTMLMetaElement | null;
+
+  if (!element) {
+    element = document.createElement("meta");
+    element.name = name;
+    document.head.appendChild(element);
+  }
+
+  element.content = content;
+}
+
+function upsertCanonical(url: string) {
+  let link = document.querySelector(
+    'link[rel="canonical"]'
+  ) as HTMLLinkElement | null;
+
+  if (!link) {
+    link = document.createElement("link");
+    link.rel = "canonical";
+    document.head.appendChild(link);
+  }
+
+  link.href = url;
+}
+
+export default function Seo({
+  title,
+  description,
+  path = "/",
+}: SeoProps) {
   useEffect(() => {
-    const siteUrl = (import.meta.env.VITE_SITE_URL || window.location.origin).replace(/\/$/, '')
-    const canonical = `${siteUrl}${path === '/' ? '/' : path}`
-    document.title = title
+    const siteUrl = (
+      import.meta.env.VITE_SITE_URL ||
+      window.location.origin
+    ).replace(/\/$/, "");
 
-    let desc = document.querySelector('meta[name="description"]') as HTMLMetaElement | null
-    if (!desc) {
-      desc = document.createElement('meta')
-      desc.name = 'description'
-      document.head.appendChild(desc)
+    const normalizedPath =
+      path === "/" ? "/" : `/${path.replace(/^\/+/, "")}`;
+
+    const canonical = `${siteUrl}${normalizedPath}`;
+
+    document.title = title;
+
+    upsertMeta("description", description);
+
+    upsertCanonical(canonical);
+
+    // --------------------------------------------------------
+    // Open Graph
+    // --------------------------------------------------------
+
+    upsertProperty("og:title", title);
+    upsertProperty("og:description", description);
+    upsertProperty("og:url", canonical);
+    upsertProperty("og:type", "website");
+    upsertProperty("og:site_name", BUSINESS.name);
+
+    // --------------------------------------------------------
+    // Twitter
+    // --------------------------------------------------------
+
+    upsertProperty("twitter:card", "summary_large_image");
+    upsertProperty("twitter:title", title);
+    upsertProperty("twitter:description", description);
+
+    // --------------------------------------------------------
+    // Structured Data
+    // --------------------------------------------------------
+
+    const existing = document.getElementById(
+      "hafiz-structured-data"
+    );
+
+    if (existing) {
+      existing.remove();
     }
-    desc.content = description
 
-    let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null
-    if (!link) {
-      link = document.createElement('link')
-      link.rel = 'canonical'
-      document.head.appendChild(link)
-    }
-    link.href = canonical
+    const script = document.createElement("script");
 
-    const existing = document.getElementById('hafiz-structured-data')
-    if (existing) existing.remove()
-    const script = document.createElement('script')
-    script.id = 'hafiz-structured-data'
-    script.type = 'application/ld+json'
+    script.id = "hafiz-structured-data";
+    script.type = "application/ld+json";
+
     script.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@graph': [
-        { '@type': 'Organization', name: BUSINESS.name, url: siteUrl, telephone: BUSINESS.phone },
+      "@context": "https://schema.org",
+
+      "@graph": [
         {
-          '@type': 'LocalBusiness',
+          "@type": "Organization",
+          "@id": `${siteUrl}/#organization`,
           name: BUSINESS.name,
+          url: siteUrl,
           telephone: BUSINESS.phone,
+        },
+
+        {
+          "@type": "LocalBusiness",
+          "@id": `${siteUrl}/#business`,
+          name: BUSINESS.name,
+          url: siteUrl,
+          telephone: BUSINESS.phone,
+
           address: {
-            '@type': 'PostalAddress',
-            streetAddress: 'Pabla, Incholi',
-            addressLocality: 'Meerut',
-            addressRegion: 'Uttar Pradesh',
-            addressCountry: 'IN',
+            "@type": "PostalAddress",
+            streetAddress: "Pabla, Incholi",
+            addressLocality: "Meerut",
+            addressRegion: "Uttar Pradesh",
+            postalCode: "",
+            addressCountry: "IN",
           },
-          url: canonical,
+
+          areaServed: [
+            "Meerut",
+            "Uttar Pradesh",
+            "India",
+          ],
         },
       ],
-    })
-    document.head.appendChild(script)
-    return () => script.remove()
-  }, [title, description, path])
+    });
 
-  return null
+    document.head.appendChild(script);
+
+    return () => {
+      script.remove();
+    };
+  }, [title, description, path]);
+
+  return null;
+}
+
+function upsertProperty(
+  property: string,
+  content: string
+) {
+  let element = document.querySelector(
+    `meta[property="${property}"]`
+  ) as HTMLMetaElement | null;
+
+  if (!element) {
+    element = document.createElement("meta");
+    element.setAttribute("property", property);
+    document.head.appendChild(element);
+  }
+
+  element.content = content;
 }

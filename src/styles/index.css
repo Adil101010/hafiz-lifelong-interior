@@ -1,34 +1,79 @@
 @import "tailwindcss";
+@theme {
+    --color-navy: #071b41;
+    --color-lime: #8ccf00;
+    --color-red: #d71920;
+    --color-gold: #f5b800;
+    --color-paper: #f8fafc;
+    --color-background: #f8fafc;
+    --color-white: #ffffff;
+    --font-display: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --shadow-soft: 0 10px 30px rgba(7, 27, 65, 0.07);
+    --shadow-strong: 0 20px 55px rgba(7, 27, 65, 0.14);
+}
+
+
+/* =========================================================
+   ROOT
+========================================================= */
+
 :root {
-    --color-navy: #071B41;
-    --color-lime: #8CCF00;
-    --color-red: #D71920;
-    --color-gold: #F5B800;
-    --color-background: #F8FAFC;
-    --color-white: #FFFFFF;
+    --color-navy: #071b41;
+    --color-lime: #8ccf00;
+    --color-red: #d71920;
+    --color-gold: #f5b800;
+    --color-background: #f8fafc;
+    --color-white: #ffffff;
+    color-scheme: light;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
 }
 
 html {
     scroll-behavior: smooth;
+    background: var(--color-background);
 }
 
 body {
     margin: 0;
     min-width: 320px;
+    min-height: 100vh;
+    overflow-x: hidden;
     background: var(--color-background);
     color: var(--color-navy);
     font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-* {
+
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
+
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
 img,
-video {
+video,
+canvas,
+svg {
     display: block;
     max-width: 100%;
+}
+
+img {
+    height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
 }
 
 button,
@@ -37,10 +82,268 @@ a {
 }
 
 button {
-    font: inherit;
+    cursor: pointer;
 }
 
 a {
     color: inherit;
     text-decoration: none;
+}
+
+::selection {
+    background: var(--color-lime);
+    color: var(--color-navy);
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+:focus-visible {
+    outline: 2px solid var(--color-lime);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* =========================================================
+   SITE CONTAINER
+========================================================= */
+
+.container-shell {
+    width: min(100% - 2rem, 1280px);
+    margin-inline: auto;
+}
+
+@media (min-width: 640px) {
+    .container-shell {
+        width: min(100% - 3rem, 1280px);
+    }
+}
+
+@media (min-width: 1024px) {
+    .container-shell {
+        width: min(100% - 4rem, 1280px);
+    }
+}
+
+@media (min-width: 1536px) {
+    .container-shell {
+        width: min(100% - 5rem, 1400px);
+    }
+}
+
+
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
+.font-display {
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: var(--color-lime);
+    font-size: 0.6875rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.section-title {
+    margin-top: 0.75rem;
+    color: var(--color-navy);
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+}
+
+.section-copy {
+    margin-top: 1rem;
+    color: rgb(71 85 105);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+}
+
+@media (min-width: 640px) {
+    .section-copy {
+        font-size: 1rem;
+    }
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn-primary {
+    display: inline-flex;
+    min-height: 2.875rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+    background: var(--color-lime);
+    padding: 0.75rem 1.25rem;
+    color: var(--color-navy);
+    font-size: 0.875rem;
+    font-weight: 800;
+    line-height: 1;
+    transition: background-color 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.btn-primary:hover {
+    background: var(--color-white);
+    box-shadow: 0 10px 25px rgba(7, 27, 65, 0.12);
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-dark {
+    display: inline-flex;
+    min-height: 2.875rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+    background: var(--color-navy);
+    padding: 0.75rem 1.25rem;
+    color: var(--color-white);
+    font-size: 0.875rem;
+    font-weight: 800;
+    line-height: 1;
+    transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.btn-dark:hover {
+    background: #0d2b62;
+    transform: translateY(-1px);
+}
+
+.btn-dark:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   SHADOW UTILITIES
+========================================================= */
+
+.shadow-soft {
+    box-shadow: 0 10px 30px rgba(7, 27, 65, 0.07);
+}
+
+.shadow-strong {
+    box-shadow: 0 20px 55px rgba(7, 27, 65, 0.14);
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(7, 27, 65, 0.25) transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: rgba(7, 27, 65, 0.25);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: rgba(7, 27, 65, 0.4);
+}
+
+
+/* =========================================================
+   HIDE SCROLLBAR
+========================================================= */
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* =========================================================
+   FORM ELEMENTS
+========================================================= */
+
+input,
+textarea,
+select {
+    max-width: 100%;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: rgb(148 163 184);
+}
+
+
+/* =========================================================
+   MOBILE SAFETY
+========================================================= */
+
+@media (max-width: 374px) {
+    .container-shell {
+        width: calc(100% - 1.5rem);
+    }
+    .btn-primary,
+    .btn-dark {
+        padding-inline: 1rem;
+    }
+}
+
+
+/* =========================================================
+   SAFE AREA FOR MOBILE DEVICES
+========================================================= */
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    body {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
 }
