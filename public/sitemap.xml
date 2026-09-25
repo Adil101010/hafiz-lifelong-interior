@@ -1,10 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://example.com/</loc></url>
-  <url><loc>https://example.com/about</loc></url>
-  <url><loc>https://example.com/school-furniture</loc></url>
-  <url><loc>https://example.com/sports-solutions</loc></url>
-  <url><loc>https://example.com/gallery</loc></url>
-  <url><loc>https://example.com/contact</loc></url>
-  <url><loc>https://example.com/get-quote</loc></url>
+
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/about</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/school-furniture</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/sports-solutions</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/gallery</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/contact</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/get-quote</loc>
+  </url>
+
+  <!-- School Furniture -->
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/school-furniture/student-desk-bench</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/school-furniture/classroom-table</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/school-furniture/school-chair</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/school-furniture/teacher-table</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/school-furniture/library-furniture</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/school-furniture/office-furniture</loc>
+  </url>
+
+  <!-- Sports Infrastructure -->
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/sports-solutions/box-cricket</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/sports-solutions/football-turf</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/sports-solutions/artificial-grass</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/sports-solutions/cricket-nets</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/sports-solutions/football-nets</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/sports-solutions/tennis-court-nets</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/sports-solutions/safety-nets</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/sports-solutions/boundary-nets</loc>
+  </url>
+
+  <!-- Legal -->
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/privacy-policy</loc>
+  </url>
+
+  <url>
+    <loc>https://hafizlifelonginterior.in/terms-and-conditions</loc>
+  </url>
+
 </urlset>
