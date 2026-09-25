@@ -62,44 +62,71 @@ export default function Footer() {
       {/* Mobile fixed contact bar */}
       <nav
         aria-label="Quick contact"
-        className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 px-2 py-2 shadow-[0_-8px_30px_rgba(7,27,65,0.12)] backdrop-blur-md sm:hidden"
+        className="fixed inset-x-0 bottom-0 z-[100] border-t border-slate-200 bg-white px-2 py-2 shadow-[0_-8px_30px_rgba(7,27,65,0.18)] sm:hidden"
       >
         <div className="grid grid-cols-3 gap-2">
+          {/* CALL */}
           <a
             href={phoneHref(BUSINESS.phone)}
             aria-label={`Call ${BUSINESS.phone}`}
-            className="flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-xl bg-navy px-1 text-[10px] font-extrabold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime"
+            className="flex min-h-12 min-w-0 flex-col items-center justify-center gap-0.5 rounded-xl bg-navy px-1 text-center !text-white transition active:scale-[0.98]"
           >
-            <Phone size={17} aria-hidden="true" />
-            CALL
+            <Phone
+              size={17}
+              strokeWidth={2.5}
+              className="shrink-0 !text-white"
+              aria-hidden="true"
+            />
+
+            <span className="block truncate text-[10px] font-extrabold leading-none !text-white">
+              CALL
+            </span>
           </a>
 
+          {/* WHATSAPP */}
           <a
             href={whatsappUrl()}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Contact us on WhatsApp"
-            className="flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-xl bg-[#25D366] px-1 text-[10px] font-extrabold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime"
+            className="flex min-h-12 min-w-0 flex-col items-center justify-center gap-0.5 rounded-xl bg-[#25D366] px-1 text-center !text-navy transition active:scale-[0.98]"
           >
-            <MessageCircle size={17} aria-hidden="true" />
-            WHATSAPP
+            <MessageCircle
+              size={17}
+              strokeWidth={2.5}
+              className="shrink-0 !text-navy"
+              aria-hidden="true"
+            />
+
+            <span className="block truncate text-[10px] font-extrabold leading-none !text-navy">
+              WHATSAPP
+            </span>
           </a>
 
+          {/* GET QUOTE */}
           <Link
             to="/get-quote"
-            className="flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-xl bg-lime px-1 text-[10px] font-extrabold text-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
+            aria-label="Get a quote"
+            className="flex min-h-12 min-w-0 flex-col items-center justify-center gap-0.5 rounded-xl bg-lime px-1 text-center !text-navy transition active:scale-[0.98]"
           >
-            <ArrowUpRight size={17} aria-hidden="true" />
-            GET QUOTE
+            <ArrowUpRight
+              size={17}
+              strokeWidth={2.5}
+              className="shrink-0 !text-navy"
+              aria-hidden="true"
+            />
+
+            <span className="block truncate text-[10px] font-extrabold leading-none !text-navy">
+              GET QUOTE
+            </span>
           </Link>
         </div>
       </nav>
 
       {/* Main footer */}
-      <footer className="bg-navy pb-24 pt-16 text-white sm:pb-10 sm:pt-20">
+      <footer className="bg-navy pb-28 pt-16 text-white sm:pb-10 sm:pt-20">
         <div className="container-shell">
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.35fr_.75fr_.9fr_1fr] lg:gap-8">
-
             {/* Brand */}
             <div className="min-w-0">
               <BrandMark />
@@ -120,7 +147,7 @@ export default function Footer() {
               <div className="mt-7">
                 <Link
                   to="/get-quote"
-               className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-lime px-4 py-3 text-sm font-extrabold !text-navy transition hover:bg-lime/90 hover:!text-navy"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-lime px-4 py-3 text-sm font-extrabold !text-navy transition hover:bg-lime/90 hover:!text-navy"
                 >
                   Start an inquiry
                   <ArrowUpRight size={16} aria-hidden="true" />
@@ -152,6 +179,7 @@ export default function Footer() {
                       className="shrink-0 text-lime"
                       aria-hidden="true"
                     />
+
                     <span>{phone}</span>
                   </a>
                 ))}
@@ -167,6 +195,7 @@ export default function Footer() {
                     className="shrink-0 text-[#25D366]"
                     aria-hidden="true"
                   />
+
                   WhatsApp
                 </a>
 
@@ -181,6 +210,7 @@ export default function Footer() {
                     className="mt-0.5 shrink-0 text-lime"
                     aria-hidden="true"
                   />
+
                   <span>{BUSINESS.location}</span>
                 </a>
 
@@ -194,6 +224,7 @@ export default function Footer() {
                       className="mt-0.5 shrink-0 text-lime"
                       aria-hidden="true"
                     />
+
                     <span className="min-w-0 break-all">
                       {BUSINESS.email}
                     </span>
@@ -250,14 +281,14 @@ function FooterCol({
         {title}
       </h3>
 
-      <div className="mt-5 space-y-3">
+      <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 min-[400px]:grid-cols-3 lg:flex lg:flex-col lg:gap-3">
         {links.map(({ label, to }) => (
           <Link
             key={label}
             to={to}
-            className="group flex min-h-6 items-center gap-1 text-sm font-semibold text-white/65 transition hover:text-white"
+            className="group flex min-w-0 items-center gap-1 text-sm font-semibold text-white/65 transition hover:text-white"
           >
-            <span>{label}</span>
+            <span className="truncate">{label}</span>
 
             <ArrowUpRight
               size={13}
